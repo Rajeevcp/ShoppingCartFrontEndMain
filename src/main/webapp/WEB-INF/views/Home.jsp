@@ -58,7 +58,7 @@
 
 		
          <jsp:include page="ProductMenu.jsp"></jsp:include>
-         <jsp:include page="Admin/AdminHome.jsp"></jsp:include>
+         <%-- <jsp:include page="Admin/AdminHome.jsp"></jsp:include> --%>
 	</c:if>
 	<c:if test="${userRole == 'customer'}">
 	
@@ -97,7 +97,31 @@ ${errorMessage}
 <!-- <div class="alert alert-danger" role="alert"> -->
 <!--   <strong>Oh snap!</strong> Change a few things up and try submitting again. -->
 <!-- </div> -->
-    
+    <c:if test="${userRole == 'ROLE_ADMIN'}">
+<jsp:include page="Admin/AdminHome.jsp"></jsp:include>
+
+</c:if>
+    <c:if test="${isUserClickedLogin !=true}">
+    <c:if test="${isUserClickedRegister !=true}">
+    <c:if test="${isAdminClickedCategories !=true}">
+    <c:if test="${isAdminClickedSupplier !=true}">
+    <c:if test="${isAdminClickedProduct !=true}">
+    <c:if test="${userClikedProduct != true }">
+    <c:if test="${userClickedCart != true }">
+    <c:if test="${userClickedCheckout != true }">
+    <c:if test="${userclickedPlaced != true }">
+    <c:if test="${userCLickedGetproduct != true }">
+<jsp:include page="show_cat.jsp"></jsp:include>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
+</c:if>
     <c:if test="${isUserClickedLogin==true}">
               <c:if test="${empty userRole}">
 				<jsp:include page="Login.jsp"></jsp:include>
@@ -137,9 +161,18 @@ ${errorMessage}
 			
 			<%@ include file="Cart.jsp" %>
 			</c:if>
+			<c:if test="${userClickedCheckout == true }">
+			<jsp:include page="checkout.jsp"></jsp:include>
+			</c:if>
+			<c:if test="${userclickedPlaced == true }">
+			<jsp:include page="checkout_complete.jsp"></jsp:include>
+			</c:if>
+			<c:if test="${userCLickedGetproduct == true }">
+			<jsp:include page="productList.jsp"></jsp:include>
+			</c:if>
 			 <c:if test="${empty userRole}">
 			 <c:if test="${empty isUserClickedLogin}">
-	    <div class="container">
+	 <%--    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2 centered">
 					<img src='<c:url value="/resources/images/shoppingcart-logo.png"></c:url>' alt="Stanley">
@@ -147,12 +180,12 @@ ${errorMessage}
 					
 				</div><!-- /col-lg-8 -->
 			</div><!-- /row -->
-	    </div> <!-- /container -->
+	    </div> <!-- /container --> --%>
 	    </c:if>
 	   </c:if>
 	</div>
 
-
+<%@ include file="footer.jsp" %>
 			
 	
 </body>

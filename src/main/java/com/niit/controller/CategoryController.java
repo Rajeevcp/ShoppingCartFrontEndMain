@@ -1,6 +1,10 @@
 package com.niit.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
@@ -48,7 +54,7 @@ public class CategoryController {
 		//return mv;
 	
 		model.addAttribute("isAdminClickedCategories", "true");
-		
+		model.addAttribute("admminCreateCategory",true);
 		//model.addAttribute("isUserClickedCategory", true);
 		model.addAttribute("category", category);
 		model.addAttribute("categoryList", categoryList);
@@ -57,18 +63,42 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("/manage_category_create")
-	public ModelAndView createCategory(@RequestParam("id") String id,@RequestParam("name") String name,
-			@RequestParam("description") String description){
-		ModelAndView mv = new ModelAndView("redirect:/manage_category");
+	public String createCategory(@RequestParam("id") String id,@RequestParam("name") String name,
+			@RequestParam("description") String description,
+			@RequestParam("cat_image") MultipartFile img,RedirectAttributes redir) throws InterruptedException{
+		
+		if(categoryDAO.getCategoryById(id) == null){
 		category.setId(id);
 		category.setName(name);
 		category.setDescription(description);
-       
+        category.setCategoryImage(img);
+        
+        Path paths=Paths.get("C:\\Users\\HP-LAP\\workspace\\ShoppingCartFrontEnd\\src\\main\\webapp\\resources\\categoryImage\\"+category.getId()+".png");
+        try 
+		{
+		img.transferTo(new File(paths.toString()));
+		Thread.sleep(5000);
+		//return "redirect:/getAllFlowers";
+		} 
+		catch (IllegalStateException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 		categoryDAO.save(category);
 	
-		mv.addObject("admminCreateCategory",true);
 		
-		return mv;
+		redir.addFlashAttribute("admminCreateCategory",true);
+		redir.addFlashAttribute("success","Category created successfully");
+		}
+		else{
+			redir.addFlashAttribute("error","Category ID is already exist");
+		}
+		
+		return "redirect:/manage_category";
 		
 	}
 	
@@ -111,12 +141,32 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value="/manage_category_update")
-	public String updateCategory(@RequestParam("name") String name,@RequestParam("description") String description, Model model){
+	public String updateCategory(@RequestParam("name") String name,@RequestParam("description") String description,
+			@RequestParam("cat_image") MultipartFile img,
+			Model model,RedirectAttributes redir) throws InterruptedException{
 		//category.setId(id);
 		category.setName(name);
 		category.setDescription(description);
+		category.setCategoryImage(img);
+		 Path paths=Paths.get("C:\\Users\\HP-LAP\\workspace\\ShoppingCartFrontEnd\\src\\main\\webapp\\resources\\categoryImage\\"+category.getId()+".png");
+	        try 
+			{
+			img.transferTo(new File(paths.toString()));
+			Thread.sleep(5000);
+			//return "redirect:/getAllFlowers";
+			} 
+			catch (IllegalStateException e) 
+			{
+				e.printStackTrace();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
+	        
 		categoryDAO.update(category);
-		model.addAttribute("message", "Category Updated");
+		redir.addFlashAttribute("success","Category Updated");
+		
 		return "redirect:/manage_category";
 	}
 	

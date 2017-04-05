@@ -3,6 +3,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <title>Insert title here</title>
+
+<style>
+.servive-block {
+  padding: 20px 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.servive-block-grey {
+  background: #95a5a6;
+}
+
+
+</style>
 </head>
 <body>
 
@@ -14,6 +27,8 @@ ${cart_list}
 
 <div class="container">
 	<div class="row">
+	<c:choose>
+	<c:when test="${not empty cart}">
 		<div class="col-xs-12">
 			<div class="panel panel-info">
 				<div class="panel-heading">
@@ -61,7 +76,7 @@ ${cart_list}
 								<h6 class="text-right">Added items?</h6>
 							</div>
 							<div class="col-xs-3">
-								<button type="button" class="btn btn-default btn-sm btn-block">
+								<button type="button" class="btn btn-default btn-sm btn-block" onclick="window.location = 'cart_checkout';">
 									Update cart
 								</button>
 							</div>
@@ -74,7 +89,7 @@ ${cart_list}
 							<h4 class="text-right">Total <strong>&#x20b9; ${TotalAmount}</strong></h4>
 						</div>
 						<div class="col-xs-3">
-							<button type="button" class="btn btn-success btn-block">
+							<button type="button" class="btn btn-success btn-block" onclick="window.location = 'cart_checkout';">
 								Checkout
 							</button>
 						</div>
@@ -82,5 +97,10 @@ ${cart_list}
 				</div>
 			</div>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="text-center servive-block servive-block-grey"><p>Your Cart Is Empty</p></div>
+		</c:otherwise>
+		</c:choose>
 	</div>
 </div>

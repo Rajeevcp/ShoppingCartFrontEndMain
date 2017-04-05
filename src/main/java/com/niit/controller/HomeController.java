@@ -104,6 +104,7 @@ public class HomeController {
 		mv.addObject("isUserClickedRegister", "true");
 		return mv;
 	}
+	
 
 	
 	
@@ -121,7 +122,9 @@ public class HomeController {
 		session.removeAttribute("userName");
 		session.removeAttribute("user");
 		session.removeAttribute("cartSize");
-		return "Home";
+		
+		
+		return "redirect:home";
 	}
 
 }

@@ -37,7 +37,7 @@
 							<li><a href="display_product/get/${product.id}">${product.name}</a></li>
 							
 						</c:forEach>
-						<li><a href="display_category_product/get/${category.id}">All Product</a></li>
+						<li><a href="category/${category.id}">All Product</a></li>
 					</ul></c:if></li>
 			</c:forEach>
 

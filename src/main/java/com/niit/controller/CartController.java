@@ -72,7 +72,7 @@ public class CartController {
 		ModelAndView mv = new ModelAndView("Home");
 		User user = (User) session.getAttribute("user");
 		String user_id = user.getId();
-		System.out.println(user_id);
+		
 		List cart_list = (List) cartDAO.list(user_id);
 		int count = cart_list.size();
 		session.setAttribute("cartSize",count);
@@ -101,6 +101,57 @@ public class CartController {
 		mv.addObject("cartDelete","Item deleted");
 		return mv;
 		
+		
+	}
+	@RequestMapping("/cart_checkout")
+	public String cart_Checkout(Model model){
+		
+		
+		User user = (User) session.getAttribute("user");
+		String user_id = user.getId();
+		
+		List cart_list = (List) cartDAO.list(user_id);
+		int count = cart_list.size();
+		session.setAttribute("cartSize",count);
+		Double total_amount = cartDAO.getTotalAmount(user_id);
+		// mv.addObject("myCart",cartDAO.get(user_id));
+		model.addAttribute("cart", cart_list);
+
+		model.addAttribute("TotalAmount", total_amount);
+		
+		
+		
+		
+		model.addAttribute("userClickedCheckout",true);
+		return "Home";
+		
+	}
+	@RequestMapping("/checkout_complete")
+	public String checkoutComplete(Model model){
+		
+		User user = (User) session.getAttribute("user");
+		String user_id = user.getId();
+		
+		List<MyCart> cart_list =  cartDAO.list(user_id);
+		
+		for(MyCart p:cart_list){
+	System.out.println("Cart ID is"+p.getId());
+	
+	
+	myCart.setId(p.getId());
+	myCart.setStatus('C');
+	myCart.setDate_added(p.getDate_added());
+	myCart.setPrice(p.getPrice());
+	
+	myCart.setProduct_name(p.getProduct_name());
+	myCart.setQuantity(p.getQuantity());
+	myCart.setUser_id(user_id);
+	cartDAO.update(myCart);
+	session.setAttribute("cartSize",0);
+			
+		}
+		model.addAttribute("userclickedPlaced",true);
+		return "Home";
 		
 	}
 }

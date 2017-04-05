@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.*;
 
 import com.niit.shoppingcart.dao.UserDAO;
@@ -44,19 +45,32 @@ public class UserController {
 
 
 	@RequestMapping("/user_registration")
-	public ModelAndView userRegistration(@RequestParam("user") String id,@RequestParam("name") String name,
-			@RequestParam("contactinfo") String contact,@RequestParam("email") String mail,@RequestParam("password") String password){
-		
+	public String userRegistration(@RequestParam("user") String id,@RequestParam("name") String name,
+			@RequestParam("contactinfo") String contact,@RequestParam("email") String mail,@RequestParam("password") String password,
+			RedirectAttributes redir){
+		if(userDAO.getUser(id) == null) {
+			try{
 		user.setId(id);
 		user.setName(name);
 		user.setContact(contact);
 		user.setMail(mail);
 		user.setPassword(password);
-		user.setRole("customer");
+		user.setRole("ROLE_CUSTOMER");
 		userDAO.save(user);
-		ModelAndView mv = new ModelAndView("redirect:/home");
-		mv.addObject("msg","Registration Success, Please Login Here");
-		return mv;
+		
+		redir.addFlashAttribute("msg","Registration Success, Please Login Here");
+		return "redirect:/login";
+			}
+			catch(Exception e){
+				redir.addFlashAttribute("errorMessage","Password length must be in between 2-14");
+				return "redirect:/home";
+			}
+		}
+		else {
+			redir.addFlashAttribute("errorMessage","ID is not available");	
+			return "redirect:/home";
+		}
+		
 		
 	}
 	

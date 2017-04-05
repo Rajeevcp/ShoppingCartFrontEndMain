@@ -17,33 +17,46 @@
 
 
 	<h4 class="red-text text-center">Product management</h4>
+	
+	<c:if test="${not empty error }">
+		<div class="text-center alert alert-danger">${error }</div>
+	</c:if>
+	<c:if test="${ not empty success }">
+		<div class="text-center alert alert-success">${success }</div>
+	</c:if>
+	<c:if test=" ${not empty message }">
 
+		<div class="text-center alert alert-success">${message }</div>
+	</c:if>
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Product Form</div>
 			<div class="panel-body">
-			  <c:choose>
-  <c:when test="${empty product.id }">
-  <c:url var="addAction" value="manage_product_create?${_csrf.parameterName}=${_csrf.token}"></c:url>
-  
-  </c:when>
-  <c:otherwise>
-    <c:url var="addAction" value="manage_product_update?${_csrf.parameterName}=${_csrf.token}"></c:url>
-  </c:otherwise>
-  </c:choose>
-				<form method="POST" action="${addAction}" enctype="multipart/form-data" 
-				  class="form-inline">
+				<c:choose>
+					<c:when test="${empty product.id }">
+						<c:url var="addAction"
+							value="manage_product_create?${_csrf.parameterName}=${_csrf.token}"></c:url>
+
+					</c:when>
+					<c:otherwise>
+						<c:url var="addAction"
+							value="manage_product_update?${_csrf.parameterName}=${_csrf.token}"></c:url>
+					</c:otherwise>
+				</c:choose>
+				<form method="POST" action="${addAction}"
+					enctype="multipart/form-data" class="form-inline">
 					<div class="form-group">
 						<div class="col-xs-6">
 							<label for="id" class="col-xs-4 control-label">ID:</label>
 							<c:choose>
-							<c:when test="${empty product.id }">
-							<input class="form-control" type="text" name="id"/>
-							</c:when>
-							<c:otherwise>
-							<input type="text" class="form-control" name="id" value="${product.id }" readonly="readonly" disabled="disabled">
-							
-							</c:otherwise>
+								<c:when test="${empty product.id || empty createProduct  }">
+									<input class="form-control" type="text" required name="id" />
+								</c:when>
+								<c:otherwise>
+									<input type="text" class="form-control" required name="id"
+										value="${product.id }" readonly="readonly" disabled="disabled">
+
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
@@ -51,15 +64,16 @@
 						<div class="col-xs-6">
 							<label for="name" class="col-xs-3 control-label">Name:</label>
 							<c:choose>
-							<c:when test="${empty product.id }">
-							<input class="form-control" type="text" name="name">
-							
-							</c:when>
-							<c:otherwise>
-							
-							<input class="form-control" type="text" name="name" value="${product.name }">
-							
-							</c:otherwise>
+								<c:when test="${empty product.id || empty createProduct}">
+									<input class="form-control" required type="text" name="name">
+
+								</c:when>
+								<c:otherwise>
+
+									<input class="form-control" required type="text" name="name"
+										value="${product.name }">
+
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
@@ -67,48 +81,48 @@
 						<div class="col-xs-6">
 							<label for="name" class="col-xs-3 control-label">Price:</label>
 							<c:choose>
-							<c:when test="${empty product.id }">
-							<input class="form-control" type="text" name="price">
-							
-							</c:when>
-							<c:otherwise>
-							
-							<input class="form-control" type="text" name="price" value="${product.price }">
-							
-							</c:otherwise>
+								<c:when test="${empty product.id || empty createProduct}">
+									<input class="form-control" required type="text" name="price">
+
+								</c:when>
+								<c:otherwise>
+
+									<input class="form-control" required type="text" name="price"
+										value="${product.price }">
+
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-6">
-							<label for="name" class="col-xs-3 ">Category_ID:</label>
-							
-							<select class="selectpicker form-control" name="category">
+							<label for="name" class="col-xs-3 ">Category_ID:</label> <select
+								class="selectpicker form-control" name="category">
 								<c:forEach var="category" items="${categoryList }">
-	                            <c:set var="category_select" value=""></c:set>
-	                         <c:if test="${category.id eq product.category_id}">
-	                         <c:set var="category_select" value="selected"></c:set>
-	                         
-	                         </c:if>
+									<c:set var="category_select" value=""></c:set>
+									<c:if test="${category.id eq product.category_id}">
+										<c:set var="category_select" value="selected"></c:set>
 
-								<option ${category_select} value="${category.id }">${category.name }</option>
+									</c:if>
+
+									<option ${category_select} value="${category.id }">${category.name }</option>
 
 								</c:forEach>
 							</select>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="col-xs-6">
 							<label for="name" class="col-xs-3 control-label">Supplier_ID:</label>
-                        <select class="selectpicker form-control" name="supplier">
-                        <c:forEach var="supplier" items="${supplierList }">
-	<c:set var="supplier_select" value=""></c:set>
-	  <c:if test="${supplier.id eq product.supplier_id}">
-	                         <c:set var="supplier_select" value="selected"></c:set>
-	                         
-	                         </c:if>
-								<option ${supplier_select} value="${supplier.id }">${supplier.name }</option>
+							<select class="selectpicker form-control" name="supplier">
+								<c:forEach var="supplier" items="${supplierList }">
+									<c:set var="supplier_select" value=""></c:set>
+									<c:if test="${supplier.id eq product.supplier_id}">
+										<c:set var="supplier_select" value="selected"></c:set>
+
+									</c:if>
+									<option ${supplier_select} value="${supplier.id }">${supplier.name }</option>
 
 								</c:forEach>
 							</select>
@@ -118,57 +132,69 @@
 						<div class="col-xs-6">
 							<label for="description" class="col-xs-3 control-label">Description:</label>
 							<c:choose>
-							<c:when test="${empty product.id}">
-							<input class="form-control" type="text" name="description">
-							
-							</c:when>
-							<c:otherwise>
-							
-							<input class="form-control" type="text" name="description" value="${product.description}">
-							</c:otherwise>
+								<c:when test="${empty product.id || empty createProduct}">
+									<input class="form-control" required type="text"
+										name="description">
+
+								</c:when>
+								<c:otherwise>
+
+									<input class="form-control" required type="text"
+										name="description" value="${product.description}">
+								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
-					
+
 					<div class="form-group">
 						<div class="col-xs-6">
-							Select File :
-						<input type="file" name="Image"/>
+						<c:choose>
+						<c:when test="${empty product.id || empty createProduct}">
+							Select File : <input type="file" name="Image" />
+						</c:when>
+						<c:otherwise>
+						Select File : <input type="file" name="Image" value="${product.id }.png" />
+						</c:otherwise>
+						</c:choose>
+						
 						</div>
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
+						value="${_csrf.token}" />
 					<div class="form-group">
 						<div class="col-xs-6">
-							<input  type="submit" value="Publish">
+							<input type="submit" value="Publish">
 						</div>
 					</div>
+					<button type="reset" value="Reset">Reset</button>
 				</form>
 			</div>
 		</div>
 	</div>
 
-		
-			
+
+
 	<form action=""></form>
 	<div class="container">
 		<table border="2" class="table table-striped table-bordered">
 			<thead>
 				<tr>
-				<td>Image</td>
+					<td>Image</td>
 					<td>ID</td>
 					<td>Name</td>
 					<td>Price</td>
 					<td>Description</td>
 					<td>Category</td>
-					
+
 					<td>Supplier</td>
 					<td>Action</td>
 				</tr>
 			</thead>
 			<c:forEach var="product" items="${productList}">
 				<tr>
-				<td><img src="<c:url value="/resources/productimg/${product.id}.png" />"  /> </td>
+					<td><img style="width: 150px; height: 150px"
+						; src="<c:url value="/resources/productimg/${product.id}.png" />" />
+					</td>
 					<td>${product.id}</td>
 					<td>${product.name}</td>
 					<td>${product.price}</td>

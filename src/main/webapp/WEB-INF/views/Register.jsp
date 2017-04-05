@@ -67,6 +67,8 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="singlebutton"> </label>
   <div class="col-md-4">
+  <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">Register</button>
   </div>
 </div>
