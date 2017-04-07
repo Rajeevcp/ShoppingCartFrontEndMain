@@ -1,4 +1,4 @@
-#  E-Commerce web app for a Flower shop
+#  E-Commerce web app for a ELECTRONIC SHOP
 The project entitled **‘QUICK DEALS’** is an E-Commerce website where the user can purchase Electronic products online. User can create his account by registering himself with a unique USER ID and PASSWORD and then log into the portal site to browse products and purchase them.
 This site provide user friendly system to customers, everyone can purchase product by single steps. Since, modern door-to-door business and manual methods by purchasing products in markets at certain outlets seem to have a drawback, 
 the online method of purchasing products are coming into effect and are much affordable.
