@@ -108,7 +108,7 @@
 
 <c:url value='/j_spring_security_check' var="logins" />
 
-    	  <div class="modal-dialog">
+    	  <div class="modal-dialog" style="color:red">
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
 				  <form name='loginForm'

@@ -33,10 +33,10 @@ ${product.supplier.name} --%>
 						
 					</div>
 					<div class="details col-md-6">
-						<h3 class="product-title">${product.name }</h3>
+						<h3 class="product-title" style="color:black">${product.name }</h3>
 					
-						<p class="product-description">${product.description}</p>
-						<h4 class="price">current price: <span>&#x20b9; ${product.price}</span></h4>
+						<p class="product-description" style="color:black">${product.description}</p>
+						<h4 class="price" style="color:black">current price: <span>&#x20b9; ${product.price}</span></h4>
 						
 						
 						

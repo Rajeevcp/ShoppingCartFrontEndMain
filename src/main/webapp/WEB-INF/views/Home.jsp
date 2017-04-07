@@ -5,29 +5,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Welcome to Electronics World</title>
+<title>Quick Deals</title>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="<c:url value="/resources/css/main.css"></c:url>">
 <link rel="stylesheet" href='<c:url value="/resources/lib/jquery/jquery-ui-1.10.4.custom.css"/>'>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-
+.navbar .nav>li>a {
+    font-size: 15px !important;
+    }
+    .dropdown-menu>li>a {
+    font-size: 12px !important;
+    }
+   
 .btn-danger {
     color: #9c9539;
-    background-color: rgba(217, 79, 187, 0.19) !important ;
-    border-color: #222222 !important;
+         background-color: rgb(255, 255, 255) !important;
+    border-color: #ffffff !important;
 }
+
+
 .glyphicon {
-    font-size: 33px !important;
+    font-size: 50px !important;
     color: #5bc0de !important;
+}
+.btn-group-lg>.btn, .btn-lg {
+
+    border-radius: 27px;
+}
+body {
+  
+   color: #fff !important;
 }
 </style>
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-inverse navbar-static-top" style="height:250px">
       <div class="container">
      <div style="margin-top: -47px;">
      
@@ -44,15 +62,15 @@
      <a href="${logoutUrl}" class="btn btn-info">Logout</a>
 
 	
-    <div class="button-wrapper pull-right">
-	<a class="btn btn-danger btn-lg" data-toggle="tooltip" data-placement="bottom" title="You don't have any bookings yet." href="myCart"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="items">${cartSize}</span></a>
+    <div class="pull-right">
+	<a href="myCart"><span class="glyphicon glyphicon-shopping-cart"></span> </a><span  class="items">${cartSize}</span>
 </div> 
 </c:otherwise>
      </c:choose>
      </div>
  	<div>
        
-          <h2 class="brand text-center" style="color:#ffffff">Shopping Carts</h2>
+          <h2 class="brand text-center" style="color:#ffffff">Quick Deals</h2>
         </div>
      <c:if test="${userRole == 'ROLE_ADMIN'}">
 
@@ -70,7 +88,7 @@
   <jsp:include page="ProductMenu.jsp"></jsp:include>
    </c:if>
       
-	
+	<jsp:include page="AngularJs.jsp"></jsp:include>
 
 	
       </div>
@@ -131,7 +149,8 @@ ${errorMessage}
 			</c:if>
 			<c:if test="${isUserClickedRegister==true}">
 			<c:if test="${empty userRole}">
-				<jsp:include page="Register.jsp"></jsp:include>
+				<%-- <jsp:include page="Register.jsp"></jsp:include> --%>
+				<jsp:include page="Registers.jsp"></jsp:include>
 			</c:if>
 			
 			</c:if>

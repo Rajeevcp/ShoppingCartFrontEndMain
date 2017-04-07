@@ -4,7 +4,7 @@
                 <div class="row">
                     <p></p>
                 </div>
-                <div class="row">
+                <div class="row" style="color:black">
                     <div style="display: table; margin: auto;">
                         <span class="step step_complete"> <a href="${pageContext.request.contextPath}/myCart" class="check-bc">Cart</a> <span class="step_line step_complete"> </span> <span class="step_line backline"> </span> </span>
                         <span class="step step_complete"> <a href="#" class="check-bc">Checkout</a> <span class="step_line "> </span> <span class="step_line step_complete"> </span> </span>

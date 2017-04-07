@@ -58,16 +58,16 @@ public class UserController {
 		user.setRole("ROLE_CUSTOMER");
 		userDAO.save(user);
 		
-		redir.addFlashAttribute("msg","Registration Success, Please Login Here");
+		redir.addFlashAttribute("msg","REGISTRATION SUCCESS, PLEASE LOGIN HERE");
 		return "redirect:/login";
 			}
 			catch(Exception e){
-				redir.addFlashAttribute("errorMessage","Password length must be in between 2-14");
+				redir.addFlashAttribute("errorMessage","PASSWORD LENGTH MUST BE IN BETWEEN 2-14");
 				return "redirect:/home";
 			}
 		}
 		else {
-			redir.addFlashAttribute("errorMessage","ID is not available");	
+			redir.addFlashAttribute("errorMessage","ID IS NOT AVAILABLE");	
 			return "redirect:/home";
 		}
 		
@@ -80,19 +80,19 @@ public class UserController {
 			
 		
 			//log.debug("Starting of the method loginError");
-			model.addAttribute("errorMessage", "Invalid Credentials.  Please try again.");
+			model.addAttribute("errorMessage", "INVALID CREDENTIALS PLEASE TRY AGAIN.");
 			//log.debug("Ending of the method loginError");
 			return "Home";
 
 		}
 	//<security:access-denied-handler error-page="/accessDenied" />
 		@RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
-		public String accessDenied(Model model) {
+		public String accessDenied(Model model,RedirectAttributes redir) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String id = auth.getName();
-			System.out.println(id);
+			
 			//log.debug("Starting of the method accessDenied");
-			model.addAttribute("errorMessage", "You are not authorized to access this page");
+			redir.addFlashAttribute("errorMessage", "YOU ARE NOT AUTHORIZED TO ACCESS THIS PAGE ");
 			//log.debug("Ending of the method accessDenied");
 			return "Home";
 

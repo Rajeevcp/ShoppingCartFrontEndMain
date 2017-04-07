@@ -51,7 +51,7 @@ ${cart_list}
 						<div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
 						</div>
 						<div class="col-xs-4">
-							<h4 class="product-name"><strong>${myCart.product_name}</strong></h4><h4><small>Product description</small></h4>
+							<h4 class="product-name" style="color:gray"><strong>${myCart.product_name}</strong></h4>
 						</div>
 						<div class="col-xs-6">
 							<div class="col-xs-6 text-right">
@@ -86,7 +86,7 @@ ${cart_list}
 				<div class="panel-footer">
 					<div class="row text-center">
 						<div class="col-xs-9">
-							<h4 class="text-right">Total <strong>&#x20b9; ${TotalAmount}</strong></h4>
+							<h4 class="text-right" style="color:black">Total <strong>&#x20b9; ${TotalAmount}</strong></h4>
 						</div>
 						<div class="col-xs-3">
 							<button type="button" class="btn btn-success btn-block" onclick="window.location = 'cart_checkout';">

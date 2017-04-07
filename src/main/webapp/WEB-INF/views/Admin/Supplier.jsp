@@ -11,9 +11,9 @@
 </head>
 <body>
 	
-	<h4 class="red-text text-center">Supplier Management</h4>
+	<h4 style="color:black" class="red-text text-center">Supplier Management</h4>
 	
-	<div class="container">
+	<div class="container" style="color:black">
 	<div class="panel panel-primary">
   <div class="panel-heading">Supplier Form</div>
   <div class="panel-body">
@@ -86,7 +86,7 @@
 		</div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="color:black">
 		<table border="2" class="table table-striped table-bordered">
 			<thead>
 				<tr>

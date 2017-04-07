@@ -16,7 +16,7 @@
 <body>
 
 
-	<h4 class="red-text text-center">Product management</h4>
+	<h4 style="color:black" class="red-text text-center">Product management</h4>
 	
 	<c:if test="${not empty error }">
 		<div class="text-center alert alert-danger">${error }</div>
@@ -28,7 +28,7 @@
 
 		<div class="text-center alert alert-success">${message }</div>
 	</c:if>
-	<div class="container">
+	<div class="container" style="color:black">
 		<div class="panel panel-primary">
 			<div class="panel-heading">Product Form</div>
 			<div class="panel-body">
@@ -175,7 +175,7 @@
 
 
 	<form action=""></form>
-	<div class="container">
+	<div class="container"style="color:black;">
 		<table border="2" class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -201,7 +201,7 @@
 					<td>${product.description}</td>
 					<td>${product.category.name}</td>
 					<td>${product.supplier.name}</td>
-					<td><a class="btn btn-primary"
+					<td><a style="width:120px;" class="btn btn-primary"
 						onclick="return confirm('Are you sure you want to edit this category?');"
 						href="<c:url value='manage_product_edit/${product.id}' />"> <span
 							class="glyphicon glyphicon-pencil" aria-hidden="true"></span>

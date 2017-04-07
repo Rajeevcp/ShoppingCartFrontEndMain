@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CartDAO;
 import com.niit.shoppingcart.dao.CategoryDAO;
@@ -25,6 +28,7 @@ import com.sun.javafx.sg.prism.NGShape.Mode;
 @Controller
 public class CartController {
 
+	private static Logger log = LoggerFactory.getLogger(CartController.class);
 	@Autowired
 	private CategoryDAO categoryDAO;
 
@@ -44,8 +48,9 @@ public class CartController {
 	private UserDAO userDAO;
 
 	@RequestMapping(value = "/cart/add/{id}", method = RequestMethod.GET)
-	public String saveCart(@PathVariable("id") String id, Model model) {
-
+	public String saveCart(@PathVariable("id") String id, Model model,RedirectAttributes redir) {
+		log.debug("Starting method of saveCart");
+try {
 		User user = (User) session.getAttribute("user");
 		// System.out.println(user.getId());
 		String user_id = user.getId();
@@ -62,12 +67,20 @@ public class CartController {
 		myCart.setStatus('N');
 		myCart.setDate_added(today);
 		cartDAO.save(myCart);
-		model.addAttribute("cartMsg", "Item added successfully");
+		log.debug("Ending method saveCart");
+		//model.addAttribute("cartMsg", "Item added successfully");
+		redir.addFlashAttribute("msg","ITEM ADDED SUCCESSFULLY");
 		return "redirect:/myCart";
+}
+catch(Exception e) {
+	redir.addFlashAttribute("errorMessage","PLEASE LOGIN TO ADD PRODUCT INTO CART");
+	return "redirect:/home";
+}
 	}
 
 	@RequestMapping(value = "/myCart")
 	public ModelAndView showCart() {
+		log.debug("Starting method show cart");
 
 		ModelAndView mv = new ModelAndView("Home");
 		User user = (User) session.getAttribute("user");
@@ -82,6 +95,7 @@ public class CartController {
 
 		mv.addObject("TotalAmount", total_amount);
 		mv.addObject("userClickedCart", true);
+		log.debug("Ending method show cart");
 		return mv;
 	}
 

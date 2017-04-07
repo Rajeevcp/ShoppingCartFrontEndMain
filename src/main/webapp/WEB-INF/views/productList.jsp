@@ -12,6 +12,15 @@
     font-size: 20px;
     line-height: 28px;    
 }
+
+}
+p {
+
+    font-size: 14px;
+}
+.thumbnail {
+    border: 1px solid #a91c1c;
+    border-radius: 10px;
 }
 </style>
 </head>

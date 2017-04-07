@@ -11,7 +11,7 @@
 <div class="container">
 	<div class="row">
 	<div class="page-header">
-	<h1 class="text-center">TOP CATEGORIES</h1>
+	<h1 class="text-center" style="color:black">TOP CATEGORIES</h1>
 	</div>
 	<c:forEach items="${categoryList}" var="category">
         <!-- Boxes de Acoes -->
@@ -19,7 +19,7 @@
 			<div class="box">
 			<div class="icon">	
 			<div class="info">
-						<h3 class="title">${category.name }</h3>
+						<h3 class="title" style="font-style:italic;color:#80124b">${category.name }</h3>
 			<a href="category/${category.id }"><img style="width: 250px; height: 250px"; src="<c:url value="/resources/categoryImage/${category.id}.png" />" /></a>
 			</div>
 			</div>

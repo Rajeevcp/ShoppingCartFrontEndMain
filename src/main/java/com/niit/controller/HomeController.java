@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niit.shoppingcart.dao.CategoryDAO;
 import com.niit.shoppingcart.dao.ProductDAO;
@@ -110,8 +111,8 @@ public class HomeController {
 	
 	
 	@RequestMapping("/j_spring_security_logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("logout statements started");
+	public String logout(HttpServletRequest request, HttpServletResponse response,RedirectAttributes redir) {
+		
 		// ModelAndView mv = new ModelAndView("/Home");
 		 CookieClearingLogoutHandler cookieClearingLogoutHandler = new CookieClearingLogoutHandler(AbstractRememberMeServices.SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY);
 		    SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
@@ -123,7 +124,7 @@ public class HomeController {
 		session.removeAttribute("user");
 		session.removeAttribute("cartSize");
 		
-		
+		redir.addFlashAttribute("msg","YOU HAVE BEEN LOGGED OUT");
 		return "redirect:home";
 	}
 

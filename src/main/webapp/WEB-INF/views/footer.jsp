@@ -173,10 +173,7 @@
 <!DOCTYPE html>
 <head>
 
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="footer, address, phone, icons" />
+  
 
 	<title>State College of Florida Libraries</title>
 
@@ -193,15 +190,10 @@
 
 <head>
 
-    <meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="footer, address, phone, icons" />
 
 	<title>State College of Florida Libraries </title>
 
-	<link rel="stylesheet" href="css/demo.css">
-	<link rel="stylesheet" href="css/footer-distributed-with-address-and-phones.css">
+	
 	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
@@ -220,14 +212,7 @@
 				
 
 
-				<p class="footer-links">
-					<p><a href="http://discover.linccweb.org/primo_library/libweb/action/myAccountMenu.do?vid=FLCC1500">Home</a></p>
-				
-					<p><a href="http://www.libsurveys.com/loader.php?id=117">About Us</a></p>
-					
-					<p><a href="http://www.linccweb.org/Linking.aspx">Contact Us</a></p>
-	
-				</p>
+			
 
 			
                 </span>
@@ -271,7 +256,7 @@
                 </br>
                 <div class="row"><span class="hidden-xs">
 					<span><h3>Our Mission Statement:</span></h3><p></p>
-					<h4><font color="white">The State College of Florida Libraries Engage Students, Faculty, Staff, and Community Members in the Discovery and Creation of Knowledge.
+					<h4><font color="white">This QUICK DEALS  is Electronic Online Shop for Home Purchase
 				</p>
                 </div>
                 </span>
